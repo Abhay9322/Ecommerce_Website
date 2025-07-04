@@ -29,7 +29,7 @@ Ecommerce-Website/
 
 ## 🧰 Tech Stack
 
-- **Frontend**: React.js, React Router, Axios, CSS/Tailwind/Bootstrap
+- **Frontend**: React.js, React Router, Axios, CSS/Tailwind
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB, Mongoose
 - **Authentication**: JWT, Bcrypt
