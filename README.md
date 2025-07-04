@@ -58,9 +58,22 @@ npm install
 
 Create .env in the backend/ folder:
 
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+PORT = 500
+JWT_SECRET = "greatstack"
+ADMIN_EMAIL = "admin@example.com"
+ADMIN_PASSWORD = "greatstack123"
+
+MONGODB_URI =  "Paste MongoDB Url
+
+CLOUDINARY_API_KEY = " "
+CLOUDINARY_SECRET_KEY = " "
+CLOUDINARY_NAME = " "
+
+STRIPE_SECRET_KEY = "Paste Stripe Secret key"
+
+RAZORPAY_KEY_SECRET = 'Paste Razorpay Secret key'
+RAZORPAY_KEY_ID = 'Paste Razorpay key Id'
+
 
 Start the App
 
