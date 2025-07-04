@@ -1,0 +1,6 @@
+# .gitignore file mein ye add karo (agar nahi hai)
+node_modules/
+dist/
+build/
+.vscode/
+.env
