@@ -6,14 +6,27 @@ const ProductItem = ({ id, image, name, price }) => {
   const { currency } = useContext(ShopContext);
 
   return (
-    <Link onClick={() => scrollTo(0, 0)} className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
-      <div className='overflow-hidden'>
-        <img className='hover:scale-110 transition ease-in-out' src={image[0]} alt="" />
+    <Link
+      onClick={() => scrollTo(0, 0)}
+      to={`/product/${id}`}
+      className='group block text-gray-700 hover:text-black transition duration-300'
+    >
+      {/* Product Image */}
+      <div className='overflow-hidden rounded-lg bg-white shadow-sm'>
+        <img
+          src={image[0]}
+          alt={name}
+          className='w-full h-auto object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out'
+        />
       </div>
-      <p className='pt-3 pb-1 text-sm'>{name}</p>
 
-      {/* Rs with comma format like Rs 1,299 */}
-      <p className='text-sm font-medium'>Rs {price.toLocaleString('en-IN')}</p>
+      {/* Product Info */}
+      <div className='mt-3'>
+        <p className='text-sm md:text-base font-medium truncate'>{name}</p>
+        <p className='text-sm text-gray-600 mt-1'>
+          {currency} {price.toLocaleString('en-IN')}
+        </p>
+      </div>
     </Link>
   )
 }

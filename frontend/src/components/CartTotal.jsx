@@ -3,37 +3,41 @@ import { ShopContext } from '../context/ShopContext'
 import Title from './Title';
 
 const CartTotal = () => {
-
   const { delivery_fee, getCartAmount } = useContext(ShopContext);
 
+  const subtotal = getCartAmount();
+  const total = subtotal === 0 ? 0 : subtotal + delivery_fee;
+
   return (
-    <div className='w-full'>
-      <div className='text-2xl'>
-        <Title text1={'CART'} text2={'TOTALS'} />
+    <div className="w-full p-6 border rounded-lg shadow-sm bg-white">
+      {/* Section Title */}
+      <div className="mb-4 text-xl font-semibold text-gray-800">
+        <Title text1="CART" text2="TOTALS" />
       </div>
 
-      <div className='flex flex-col gap-2 mt-2 text-sm'>
-        <div className='flex justify-between'>
-          <p>Subtotal</p>
-          <p>Rs {getCartAmount().toLocaleString('en-IN')}.00</p>
+      {/* Pricing Info */}
+      <div className="flex flex-col gap-3 text-sm text-gray-700">
+        <div className="flex justify-between">
+          <span>Subtotal</span>
+          <span>₹{subtotal.toLocaleString('en-IN')}.00</span>
         </div>
-        <hr />
-        <div className='flex justify-between'>
-          <p>Shipping Fee</p>
-          <p>Rs {delivery_fee.toLocaleString('en-IN')}.00</p>
+
+        <div className="border-t" />
+
+        <div className="flex justify-between">
+          <span>Shipping Fee</span>
+          <span>₹{delivery_fee.toLocaleString('en-IN')}.00</span>
         </div>
-        <hr />
-        <div className='flex justify-between'>
-          <b>Total</b>
-          <b>
-            Rs {(getCartAmount() === 0
-              ? 0
-              : (getCartAmount() + delivery_fee)).toLocaleString('en-IN')}.00
-          </b>
+
+        <div className="border-t" />
+
+        <div className="flex justify-between text-base font-medium pt-1">
+          <span>Total</span>
+          <span>₹{total.toLocaleString('en-IN')}.00</span>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CartTotal
+export default CartTotal;

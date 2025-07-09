@@ -1,36 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ShopContext } from '../context/ShopContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { ShopContext } from '../context/ShopContext';
 import Title from './Title';
 import ProductItem from './ProductItem';
 
 const BestSeller = () => {
+  const { products } = useContext(ShopContext);
+  const [bestSeller, setBestSeller] = useState([]);
 
-    const {products} = useContext(ShopContext);
-    const [bestSeller,setBestSeller] = useState([]);
-
-    useEffect(()=>{
-        const bestProduct = products.filter((item)=>(item.bestseller));
-        setBestSeller(bestProduct.slice(0,5))
-    },[products])
+  useEffect(() => {
+    const bestProduct = products.filter((item) => item.bestseller);
+    setBestSeller(bestProduct.slice(0, 5));
+  }, [products]);
 
   return (
-    <div className='my-10'>
-      <div className='text-center text-3xl py-8'>
-        <Title text1={'BEST'} text2={'SELLERS'}/>
-        <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.
+    <section className="bg-white py-16 px-4 sm:px-8 lg:px-20">
+      {/* Section Title */}
+      <div className="text-center mb-10">
+        <Title text1="BEST" text2="SELLERS" />
+        <p className="mt-3 text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+          Discover our top-rated products that our customers love the most.
         </p>
       </div>
 
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6'>
-        {
-            bestSeller.map((item,index)=>(
-                <ProductItem key={index} id={item._id} name={item.name} image={item.image} price={item.price} />
-            ))
-        }
+      {/* Product Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-8">
+        {bestSeller.map((item, index) => (
+          <div
+            key={index}
+            className="opacity-0 animate-fade-in transition-opacity duration-500 delay-[index * 100] fill-mode-forwards"
+          >
+            <ProductItem
+              id={item._id}
+              name={item.name}
+              image={item.image}
+              price={item.price}
+            />
+          </div>
+        ))}
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default BestSeller
+export default BestSeller;
