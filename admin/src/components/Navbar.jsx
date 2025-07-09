@@ -6,11 +6,14 @@ const Navbar = ({ setToken }) => {
     <div className='flex items-center justify-between px-6 sm:px-10 py-3 bg-white shadow-sm border-b'>
 
       {/* Logo */}
-      <img
+      {/* <img
         src={assets.logo}
         alt="Logo"
         className='w-28 sm:w-36 object-contain'
-      />
+      /> */}
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+        🛍️ ForEveryYou
+      </h1>
 
       {/* Logout Button */}
       <button
