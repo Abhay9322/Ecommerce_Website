@@ -30,7 +30,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-gray-800 mb-3">GET IN TOUCH</h3>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li className="hover:text-black transition">📞 9345867534</li>
+            <li className="hover:text-black transition">📞 9322721757</li>
             <li className="hover:text-black transition">✉️ contact@foreveryou.com</li>
           </ul>
         </div>
