@@ -5,12 +5,10 @@ import { toast } from 'react-toastify'
 import { assets } from '../assets/assets'
 
 const Orders = ({ token }) => {
-
   const [orders, setOrders] = useState([])
 
   const fetchAllOrders = async () => {
     if (!token) return null;
-
     try {
       const response = await axios.post(backendUrl + '/api/order/list', {}, { headers: { token } })
       if (response.data.success) {
@@ -44,63 +42,76 @@ const Orders = ({ token }) => {
   }, [token])
 
   return (
-    <div>
-      <h3>Order Page</h3>
-      <div>
-        {
-          orders.map((order, index) => (
+    <div className="p-4 md:p-8">
+      <h2 className="text-xl font-semibold mb-6 text-gray-800">📦 All Customer Orders</h2>
+
+      {orders.length === 0 ? (
+        <p className="text-gray-500 text-sm">No orders yet.</p>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {orders.map((order, index) => (
             <div
               key={index}
-              className='grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-3 items-start border-2 border-gray-200 p-5 md:p-8 my-3 md:my-4 text-xs sm:text-sm text-gray-700'
+              className="grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-4 border border-gray-200 rounded-md p-4 md:p-6 shadow-sm bg-white"
             >
-              <img className='w-12' src={assets.parcel_icon} alt="" />
-              <div>
-                <div>
-                  {order.items.map((item, index) => (
-                    <p className='py-0.5' key={index}>
-                      {item.name} x {item.quantity} <span>{item.size}</span>
-                      {index !== order.items.length - 1 && ','}
+              {/* Parcel Icon */}
+              <div className="flex justify-center">
+                <img className="w-10 md:w-12" src={assets.parcel_icon} alt="parcel" />
+              </div>
+
+              {/* Order Items and Address */}
+              <div className="text-sm text-gray-700">
+                <div className="mb-2">
+                  {order.items.map((item, idx) => (
+                    <p key={idx} className="mb-0.5">
+                      {item.name} x {item.quantity} <span>({item.size})</span>
+                      {idx !== order.items.length - 1 && ','}
                     </p>
                   ))}
                 </div>
-                <p className='mt-3 mb-2 font-medium'>
-                  {order.address.firstName} {order.address.lastName}
-                </p>
-                <div>
-                  <p>{order.address.street},</p>
-                  <p>
-                    {order.address.city}, {order.address.state}, {order.address.country}, {order.address.zipcode}
+                <div className="mt-3">
+                  <p className="font-semibold">
+                    {order.address.firstName} {order.address.lastName}
                   </p>
+                  <p>{order.address.street}</p>
+                  <p>
+                    {order.address.city}, {order.address.state}, {order.address.country} - {order.address.zipcode}
+                  </p>
+                  <p className="text-gray-500">{order.address.phone}</p>
                 </div>
-                <p>{order.address.phone}</p>
-              </div>
-              <div>
-                <p className='text-sm sm:text-[15px]'>Items : {order.items.length}</p>
-                <p className='mt-3'>Method : {order.paymentMethod}</p>
-                <p>Payment : {order.payment ? 'Done' : 'Pending'}</p>
-                <p>Date : {new Date(order.date).toLocaleDateString()}</p>
               </div>
 
-              {/* ✅ Updated Price Format */}
-              <p className='text-sm sm:text-[15px]'>
-                Rs {order.amount.toLocaleString('en-IN')}
-              </p>
+              {/* Order Meta */}
+              <div className="text-sm text-gray-700">
+                <p>🧾 Items: {order.items.length}</p>
+                <p className="mt-2">💳 Method: {order.paymentMethod}</p>
+                <p>💰 Payment: {order.payment ? 'Done ✅' : 'Pending ❌'}</p>
+                <p>📅 Date: {new Date(order.date).toLocaleDateString()}</p>
+              </div>
 
-              <select
-                onChange={(event) => statusHandler(event, order._id)}
-                value={order.status}
-                className='p-2 font-semibold'
-              >
-                <option value="Order Placed">Order Placed</option>
-                <option value="Packing">Packing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Out for delivery">Out for delivery</option>
-                <option value="Delivered">Delivered</option>
-              </select>
+              {/* Price */}
+              <div className="text-sm font-semibold text-gray-800 flex items-center">
+                ₹ {order.amount.toLocaleString('en-IN')}
+              </div>
+
+              {/* Status Dropdown */}
+              <div className="flex items-center">
+                <select
+                  onChange={(event) => statusHandler(event, order._id)}
+                  value={order.status}
+                  className="w-full p-2 text-sm border border-gray-300 rounded outline-none bg-gray-50"
+                >
+                  <option value="Order Placed">Order Placed</option>
+                  <option value="Packing">Packing</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Out for delivery">Out for delivery</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
             </div>
-          ))
-        }
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
