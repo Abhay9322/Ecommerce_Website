@@ -11,9 +11,9 @@ const About = () => {
       {/* Hero Section */}
       <section className="flex flex-col-reverse md:flex-row items-center gap-12 py-20">
         <div className="md:w-1/2">
-          <h1 className="text-4xl font-bold mb-6">Welcome to <span className="text-blue-600">Forever</span></h1>
+          <h1 className="text-4xl font-bold mb-6">Welcome to <span className="text-blue-600">ForEveryYou</span></h1>
           <p className="text-gray-600 mb-4 leading-relaxed">
-            Forever is more than just an online store—it's a lifestyle. We’re here to transform the way people shop by
+            ForEveryYou is more than just an online store—it's a lifestyle. We’re here to transform the way people shop by
             blending quality, variety, and convenience into one amazing experience.
           </p>
           <p className="text-gray-600 leading-relaxed">

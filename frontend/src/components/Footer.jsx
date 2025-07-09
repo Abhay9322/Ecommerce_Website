@@ -9,7 +9,11 @@ const Footer = () => {
 
         {/* Logo and Description */}
         <div>
-          <img src={assets.logo} alt="Logo" className="w-32 mb-4" />
+          {/* <img src={assets.logo} alt="Logo" className="w-32 mb-4" /> */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            🛍️ ForEveryYou
+          </h1>
+
           <p className="max-w-md text-gray-600 text-sm leading-relaxed">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text since the 1500s.
           </p>
@@ -31,14 +35,14 @@ const Footer = () => {
           <h3 className="text-lg font-semibold text-gray-800 mb-3">GET IN TOUCH</h3>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li className="hover:text-black transition">📞 9322721757</li>
-            <li className="hover:text-black transition">✉️ contact@foreveryou.com</li>
+            <li className="hover:text-black transition">✉️ contact@foreveryyou.com</li>
           </ul>
         </div>
       </div>
 
       {/* Divider and Bottom Note */}
       <div className="mt-10 border-t pt-5 text-center text-xs text-gray-500">
-        © 2024 Forever.com — All Rights Reserved.
+        © 2024 ForEveryYou.com — All Rights Reserved.
       </div>
     </footer>
   );

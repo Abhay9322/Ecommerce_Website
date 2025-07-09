@@ -18,14 +18,18 @@ const Navbar = () => {
         <header className="flex items-center justify-between py-5 px-4 sm:px-6 lg:px-12 shadow-sm relative z-50 bg-white">
 
             {/* Logo */}
-            <Link to="/">
+            {/* <Link to="/">
                 <img
                     src={assets.logo}
                     className="w-32 sm:w-40"
                     style={{ height: '60px', objectFit: 'contain' }}
                     alt="Logo"
                 />
-            </Link>
+            </Link> */}
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                🛍️ ForEveryYou
+            </h1>
+
 
             {/* Desktop Menu */}
             <nav className="hidden sm:flex gap-6 text-sm text-gray-700">

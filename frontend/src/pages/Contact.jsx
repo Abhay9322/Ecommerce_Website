@@ -28,10 +28,10 @@ const Contact = () => {
             <p className="font-medium">Phone:</p>
             <p>+91-9898989898</p>
             <p className="font-medium mt-2">Email:</p>
-            <p>support@forever.in</p>
+            <p>support@foreveryyou.in</p>
           </div>
           <div>
-            <p className="text-xl font-semibold text-gray-800 mb-1">Careers at Forever</p>
+            <p className="text-xl font-semibold text-gray-800 mb-1">Careers at ForEveryYou</p>
             <p className="text-gray-600 mb-4">Learn more about our teams and job openings.</p>
             <button className="px-6 py-3 text-sm border border-gray-900 rounded-md hover:bg-black hover:text-white transition duration-300">
               Explore Jobs
