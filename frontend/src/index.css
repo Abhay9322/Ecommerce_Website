@@ -4,27 +4,61 @@
 @tailwind components;
 @tailwind utilities;
 
-a.active hr{
-    display: block;
+a.active hr {
+  display: block;
 }
 
-*{
-    font-family: Outfit;
+* {
+  font-family: Outfit;
 }
 
 .prata-regular {
-    font-family: "Prata", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  ::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width:640px) {
+  a.active {
+    background-color: black;
+    color: white;
   }
-  
-  @media (max-width:640px) {
-    a.active{
-        background-color: black;
-        color: white;
-    }
-  }
+}
+
+.input-box {
+  @apply border border-gray-300 rounded px-4 py-2 w-full text-sm text-gray-700;
+}
+
+.payment-option {
+  @apply border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-3 cursor-pointer;
+}
+
+.payment-option.active {
+  @apply border-black;
+}
+
+.radio-dot {
+  @apply h-3 w-3 rounded-full border border-gray-500;
+}
+
+.payment-option.active .radio-dot {
+  @apply bg-green-500;
+}
+
+/* index.css or tailwind.css */
+
+.btn {
+  @apply bg-black text-white py-2 px-6 rounded hover:bg-gray-800 transition;
+}
+
+.btn-outline {
+  @apply border border-gray-300 px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 transition;
+}
+
+.section {
+  @apply px-5 sm:px-10 pt-10;
+}

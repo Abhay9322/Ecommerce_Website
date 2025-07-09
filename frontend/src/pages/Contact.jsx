@@ -5,25 +5,50 @@ import NewsletterBox from '../components/NewsletterBox'
 
 const Contact = () => {
   return (
-    <div>
-      
-      <div className='text-center text-2xl pt-10 border-t'>
-          <Title text1={'CONTACT'} text2={'US'} />
+    <div className="bg-white text-gray-800 px-4 md:px-16 lg:px-32 border-t">
+
+      {/* Title Section */}
+      <div className="text-center text-3xl pt-12 font-bold">
+        <Title text1="CONTACT" text2="US" />
       </div>
 
-      <div className='my-10 flex flex-col justify-center md:flex-row gap-10 mb-28'>
-        <img className='w-full md:max-w-[480px]' src={assets.contact_img} alt="" />
-        <div className='flex flex-col justify-center items-start gap-6'>
-          <p className='font-semibold text-xl text-gray-600'>Our Store</p>
-          <p className=' text-gray-500'>54709 Willms Station <br /> Suite 350, Washington, USA</p>
-          <p className=' text-gray-500'>Tel: (415) 555-0132 <br /> Email: admin@forever.com</p>
-          <p className='font-semibold text-xl text-gray-600'>Careers at Forever</p>
-          <p className=' text-gray-500'>Learn more about our teams and job openings.</p>
-          <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500'>Explore Jobs</button>
+      {/* Main Content */}
+      <div className="my-16 flex flex-col-reverse md:flex-row items-center gap-12">
+        {/* Text Info */}
+        <div className="flex flex-col justify-center gap-6 md:w-1/2 text-gray-700">
+          <div>
+            <p className="text-xl font-semibold text-gray-800 mb-2">Our Store</p>
+            <p>
+              Shop No. 12, Phoenix Marketcity<br />
+              LBS Marg, Kurla (West), Mumbai – 400070<br />
+              Maharashtra, India
+            </p>
+          </div>
+          <div>
+            <p className="font-medium">Phone:</p>
+            <p>+91-9898989898</p>
+            <p className="font-medium mt-2">Email:</p>
+            <p>support@forever.in</p>
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-gray-800 mb-1">Careers at Forever</p>
+            <p className="text-gray-600 mb-4">Learn more about our teams and job openings.</p>
+            <button className="px-6 py-3 text-sm border border-gray-900 rounded-md hover:bg-black hover:text-white transition duration-300">
+              Explore Jobs
+            </button>
+          </div>
         </div>
+
+        {/* Contact Image */}
+        <img
+          src={assets.contact_img}
+          alt="contact"
+          className="w-full md:w-[480px] rounded-lg shadow-md"
+        />
       </div>
 
-      <NewsletterBox/>
+      {/* Newsletter Section */}
+      <NewsletterBox />
     </div>
   )
 }

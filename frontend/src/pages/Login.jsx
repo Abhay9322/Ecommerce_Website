@@ -6,70 +6,127 @@ import { toast } from 'react-toastify';
 const Login = () => {
 
   const [currentState, setCurrentState] = useState('Login');
-  const { token, setToken, navigate, backendUrl } = useContext(ShopContext)
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
 
-  const [name,setName] = useState('')
-  const [password,setPasword] = useState('')
-  const [email,setEmail] = useState('')
+  const [name, setName] = useState('');
+  const [password, setPasword] = useState('');
+  const [email, setEmail] = useState('');
 
   const onSubmitHandler = async (event) => {
-      event.preventDefault();
-      try {
-        if (currentState === 'Sign Up') {
-          
-          const response = await axios.post(backendUrl + '/api/user/register',{name,email,password})
-          if (response.data.success) {
-            setToken(response.data.token)
-            localStorage.setItem('token',response.data.token)
-          } else {
-            toast.error(response.data.message)
-          }
-
+    event.preventDefault();
+    try {
+      if (currentState === 'Sign Up') {
+        const response = await axios.post(backendUrl + '/api/user/register', { name, email, password });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem('token', response.data.token);
         } else {
-
-          const response = await axios.post(backendUrl + '/api/user/login', {email,password})
-          if (response.data.success) {
-            setToken(response.data.token)
-            localStorage.setItem('token',response.data.token)
-          } else {
-            toast.error(response.data.message)
-          }
-
+          toast.error(response.data.message);
         }
-
-
-      } catch (error) {
-        console.log(error)
-        toast.error(error.message)
+      } else {
+        const response = await axios.post(backendUrl + '/api/user/login', { email, password });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem('token', response.data.token);
+        } else {
+          toast.error(response.data.message);
+        }
       }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (token) {
-      navigate('/')
+      navigate('/');
     }
-  },[token])
+  }, [token]);
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
-        <div className='inline-flex items-center gap-2 mb-2 mt-10'>
-            <p className='prata-regular text-3xl'>{currentState}</p>
-            <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <form
+        onSubmit={onSubmitHandler}
+        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl space-y-6"
+      >
+        {/* Header */}
+        <div className="text-center">
+          <h2 className="text-3xl font-extrabold text-gray-800 mb-1">{currentState}</h2>
+          <p className="text-sm text-gray-500">
+            {currentState === 'Login'
+              ? "Access your account and shop unlimited"
+              : "Sign up to start your shopping journey"}
+          </p>
         </div>
-        {currentState === 'Login' ? '' : <input onChange={(e)=>setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Name' required/>}
-        <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required/>
-        <input onChange={(e)=>setPasword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required/>
-        <div className='w-full flex justify-between text-sm mt-[-8px]'>
-            <p className=' cursor-pointer'>Forgot your password?</p>
-            {
-              currentState === 'Login' 
-              ? <p onClick={()=>setCurrentState('Sign Up')} className=' cursor-pointer'>Create account</p>
-              : <p onClick={()=>setCurrentState('Login')} className=' cursor-pointer'>Login Here</p>
-            }
+
+        {/* Name */}
+        {currentState === 'Sign Up' && (
+          <div>
+            <label className="text-sm text-gray-600 block mb-1">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Enter your name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+            />
+          </div>
+        )}
+
+        {/* Email */}
+        <div>
+          <label className="text-sm text-gray-600 block mb-1">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Enter your email"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          />
         </div>
-        <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
-    </form>
-  )
+
+        {/* Password */}
+        <div>
+          <label className="text-sm text-gray-600 block mb-1">Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+            required
+            placeholder="Enter your password"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          />
+        </div>
+
+        {/* Actions */}
+        <div className="flex justify-between text-sm text-gray-500">
+          <p className="hover:text-black cursor-pointer transition">Forgot password?</p>
+          {
+            currentState === 'Login' ? (
+              <p onClick={() => setCurrentState('Sign Up')} className="hover:text-black cursor-pointer transition">
+                Create account
+              </p>
+            ) : (
+              <p onClick={() => setCurrentState('Login')} className="hover:text-black cursor-pointer transition">
+                Login here
+              </p>
+            )
+          }
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-all duration-300"
+        >
+          {currentState === 'Login' ? 'Sign In' : 'Sign Up'}
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

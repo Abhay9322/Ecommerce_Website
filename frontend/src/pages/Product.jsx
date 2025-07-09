@@ -1,101 +1,129 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ShopContext } from '../context/ShopContext';
-import { assets } from '../assets/assets';
-import RelatedProducts from '../components/RelatedProducts';
+import { ShopContext } from '../context/ShopContext'
+import { assets } from '../assets/assets'
+import RelatedProducts from '../components/RelatedProducts'
 
 const Product = () => {
+  const { productId } = useParams()
+  const { products, currency, addToCart } = useContext(ShopContext)
 
-  const { productId } = useParams();
-  const { products, currency ,addToCart } = useContext(ShopContext);
-  const [productData, setProductData] = useState(false);
+  const [productData, setProductData] = useState(null)
   const [image, setImage] = useState('')
-  const [size,setSize] = useState('')
-
-  const fetchProductData = async () => {
-
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item)
-        setImage(item.image[0])
-        return null;
-      }
-    })
-
-  }
+  const [size, setSize] = useState('')
 
   useEffect(() => {
-    fetchProductData();
-  }, [productId,products])
+    const selectedProduct = products.find((item) => item._id === productId)
+    if (selectedProduct) {
+      setProductData(selectedProduct)
+      setImage(selectedProduct.image[0])
+    }
+  }, [productId, products])
 
-  return productData ? (
-    <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
-      {/*----------- Product Data-------------- */}
-      <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
+  const handleAddToCart = () => {
+    if (!size) return alert('Please select a size first!')
+    addToCart(productData._id, size)
+  }
 
-        {/*---------- Product Images------------- */}
-        <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
-          <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
-              {
-                productData.image.map((item,index)=>(
-                  <img onClick={()=>setImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
-                ))
-              }
+  if (!productData) return <div className="opacity-0 h-screen"></div>
+
+  return (
+    <div className="border-t pt-10 px-5 sm:px-10">
+      {/* Product Info Section */}
+      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Left - Product Images */}
+        <div className="flex-1 flex gap-4 flex-col-reverse sm:flex-row">
+          <div className="flex sm:flex-col gap-2 sm:w-[20%] overflow-x-auto sm:overflow-y-auto">
+            {productData.image.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt=""
+                onClick={() => setImage(img)}
+                className="cursor-pointer w-20 h-20 object-cover border rounded"
+              />
+            ))}
           </div>
-          <div className='w-full sm:w-[80%]'>
-              <img className='w-full h-auto' src={image} alt="" />
+          <div className="sm:w-[80%] w-full">
+            <img src={image} alt="" className="w-full rounded" />
           </div>
         </div>
 
-        {/* -------- Product Info ---------- */}
-        <div className='flex-1'>
-          <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
-          <div className=' flex items-center gap-1 mt-2'>
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_dull_icon} alt="" className="w-3 5" />
-              <p className='pl-2'>(122)</p>
+        {/* Right - Product Description */}
+        <div className="flex-1">
+          <h2 className="text-2xl font-semibold">{productData.name}</h2>
+
+          {/* Ratings */}
+          <div className="flex items-center gap-1 mt-2">
+            {[...Array(4)].map((_, i) => (
+              <img key={i} src={assets.star_icon} className="w-4" alt="" />
+            ))}
+            <img src={assets.star_dull_icon} className="w-4" alt="" />
+            <span className="ml-2 text-sm text-gray-500">(122)</span>
           </div>
-          <p className='mt-5 text-3xl font-medium'>{currency}{productData.price}</p>
-          <p className='mt-5 text-gray-500 md:w-4/5'>{productData.description}</p>
-          <div className='flex flex-col gap-4 my-8'>
-              <p>Select Size</p>
-              <div className='flex gap-2'>
-                {productData.sizes.map((item,index)=>(
-                  <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
-                ))}
-              </div>
+
+          <p className="text-3xl font-bold mt-5">{currency}{productData.price}</p>
+          <p className="text-gray-600 mt-5">{productData.description}</p>
+
+          {/* Size Selection */}
+          <div className="mt-8">
+            <p className="mb-2 font-medium">Select Size</p>
+            <div className="flex gap-2">
+              {productData.sizes.map((s, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSize(s)}
+                  className={`px-4 py-2 border rounded transition ${s === size ? 'border-orange-500 bg-orange-50' : 'bg-gray-100 hover:bg-gray-200'}`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
-          <button onClick={()=>addToCart(productData._id,size)} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>ADD TO CART</button>
-          <hr className='mt-8 sm:w-4/5' />
-          <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
-              <p>100% Original product.</p>
-              <p>Cash on delivery is available on this product.</p>
-              <p>Easy return and exchange policy within 7 days.</p>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className="bg-black text-white py-3 px-6 mt-6 text-sm rounded hover:bg-gray-800 transition"
+          >
+            ADD TO CART
+          </button>
+
+          {/* Assurance info */}
+          <div className="text-sm text-gray-500 mt-8 space-y-1">
+            <hr />
+            <p>✅ 100% Original Products</p>
+            <p>🚚 Cash on Delivery available</p>
+            <p>🔁 Easy returns within 7 days</p>
           </div>
         </div>
       </div>
 
-      {/* ---------- Description & Review Section ------------- */}
-      <div className='mt-20'>
-        <div className='flex'>
-          <b className='border px-5 py-3 text-sm'>Description</b>
-          <p className='border px-5 py-3 text-sm'>Reviews (122)</p>
+      {/* Tabs Section (Description/Reviews) */}
+      <div className="mt-16">
+        <div className="flex border-b">
+          <button className="border-t border-l border-r px-5 py-3 text-sm font-medium bg-gray-100">Description</button>
+          <button className="px-5 py-3 text-sm text-gray-500">Reviews (122)</button>
         </div>
-        <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500'>
-          <p>An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as a virtual marketplace where businesses and individuals can showcase their products, interact with customers, and conduct transactions without the need for a physical presence. E-commerce websites have gained immense popularity due to their convenience, accessibility, and the global reach they offer.</p>
-          <p>E-commerce websites typically display products or services along with detailed descriptions, images, prices, and any available variations (e.g., sizes, colors). Each product usually has its own dedicated page with relevant information.</p>
+        <div className="border px-6 py-6 text-sm text-gray-600 leading-relaxed">
+          <p>
+            An e-commerce website is an online platform that allows users to browse, buy, and manage purchases digitally. This virtual marketplace enables businesses to showcase their products and interact with customers across the globe.
+          </p>
+          <p className="mt-4">
+            Products are typically listed with detailed descriptions, images, pricing, and variations like size or color. A dedicated product page allows users to explore all key information before placing an order.
+          </p>
         </div>
       </div>
 
-      {/* --------- display related products ---------- */}
-
-      <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
-
+      {/* Related Products */}
+      <div className="mt-20">
+        <RelatedProducts
+          category={productData.category}
+          subCategory={productData.subCategory}
+        />
+      </div>
     </div>
-  ) : <div className=' opacity-0'></div>
+  )
 }
 
 export default Product
