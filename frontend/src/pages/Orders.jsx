@@ -82,10 +82,10 @@ const Orders = () => {
                 <div className="flex items-center gap-2">
                   <span
                     className={`h-2 w-2 rounded-full ${item.status === 'Delivered'
-                        ? 'bg-green-500'
-                        : item.status === 'Pending'
-                          ? 'bg-yellow-500'
-                          : 'bg-blue-500'
+                      ? 'bg-green-500'
+                      : item.status === 'Pending'
+                        ? 'bg-yellow-500'
+                        : 'bg-blue-500'
                       }`}
                   ></span>
                   <span className="text-gray-800">{item.status}</span>
