@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { ShopContext } from '../context/ShopContext'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { ShopContext } from '../context/ShopContext';
+import { Link } from 'react-router-dom';
 
 const ProductItem = ({ id, image, name, price }) => {
-  const { currency } = useContext(ShopContext);
+  const { currency } = useContext(ShopContext); // optional if you still use currency
 
   return (
     <Link
@@ -24,11 +24,11 @@ const ProductItem = ({ id, image, name, price }) => {
       <div className='mt-3'>
         <p className='text-sm md:text-base font-medium truncate'>{name}</p>
         <p className='text-sm text-gray-600 mt-1'>
-          {currency} {price.toLocaleString('en-IN')}
+          Rs. {new Intl.NumberFormat('en-IN').format(price)}
         </p>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default ProductItem
+export default ProductItem;

@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Orders = () => {
 
-  const { backendUrl, token, currency } = useContext(ShopContext)
+  const { backendUrl, token } = useContext(ShopContext)
   const [orderData, setOrderData] = useState([])
 
   const loadOrderData = async () => {
@@ -68,7 +68,7 @@ const Orders = () => {
                 <div>
                   <p className="text-base font-semibold text-gray-800">{item.name}</p>
                   <div className="mt-2 space-y-1 text-sm">
-                    <p>Price: <span className="font-medium">{currency}{item.price}</span></p>
+                    <p>Price: <span className="font-medium">Rs. {item.price.toLocaleString('en-IN')}</span></p>
                     <p>Quantity: {item.quantity}</p>
                     <p>Size: {item.size}</p>
                     <p>Date: <span className="text-gray-500">{new Date(item.date).toDateString()}</span></p>

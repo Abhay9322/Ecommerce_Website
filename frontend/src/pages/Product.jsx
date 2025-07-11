@@ -1,35 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { ShopContext } from '../context/ShopContext'
-import { assets } from '../assets/assets'
-import RelatedProducts from '../components/RelatedProducts'
-import { toast } from 'react-hot-toast' // Toast import
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ShopContext } from '../context/ShopContext';
+import { assets } from '../assets/assets';
+import RelatedProducts from '../components/RelatedProducts';
+import { toast } from 'react-hot-toast';
 
 const Product = () => {
-  const { productId } = useParams()
-  const { products, currency, addToCart } = useContext(ShopContext)
+  const { productId } = useParams();
+  const { products, addToCart } = useContext(ShopContext);
 
-  const [productData, setProductData] = useState(null)
-  const [image, setImage] = useState('')
-  const [size, setSize] = useState('')
+  const [productData, setProductData] = useState(null);
+  const [image, setImage] = useState('');
+  const [size, setSize] = useState('');
 
   useEffect(() => {
-    const selectedProduct = products.find((item) => item._id === productId)
+    const selectedProduct = products.find((item) => item._id === productId);
     if (selectedProduct) {
-      setProductData(selectedProduct)
-      setImage(selectedProduct.image[0])
+      setProductData(selectedProduct);
+      setImage(selectedProduct.image[0]);
     }
-  }, [productId, products])
+  }, [productId, products]);
 
-  // Updated Add to Cart Function with toast
   const handleAddToCart = () => {
-    if (!size) return toast.error('Please select a size first!')
-    addToCart(productData._id, size)
-    // toast.success('Item added to cart 🛒')
-    alert('Item added to cart 🛒')
-  }
+    if (!size) return toast.error('Please select a size first!');
+    addToCart(productData._id, size);
+    alert('Item added to cart 🛒');
+  };
 
-  if (!productData) return <div className="opacity-0 h-screen"></div>
+  if (!productData) return <div className="opacity-0 h-screen"></div>;
 
   return (
     <div className="border-t pt-10 px-5 sm:px-10">
@@ -66,7 +64,9 @@ const Product = () => {
             <span className="ml-2 text-sm text-gray-500">(122)</span>
           </div>
 
-          <p className="text-3xl font-bold mt-5">{currency}{productData.price}</p>
+          {/* Price with Rs. */}
+          <p className="text-3xl font-bold mt-5">Rs. {productData.price.toLocaleString('en-IN')}</p>
+
           <p className="text-gray-600 mt-5">{productData.description}</p>
 
           {/* Size Selection */}
@@ -103,7 +103,7 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Tabs Section (Description/Reviews) */}
+      {/* Tabs Section */}
       <div className="mt-16">
         <div className="flex border-b">
           <button className="border-t border-l border-r px-5 py-3 text-sm font-medium bg-gray-100">Description</button>
@@ -127,7 +127,8 @@ const Product = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
+

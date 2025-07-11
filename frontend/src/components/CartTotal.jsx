@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { ShopContext } from '../context/ShopContext'
+import React, { useContext } from 'react';
+import { ShopContext } from '../context/ShopContext';
 import Title from './Title';
 
 const CartTotal = () => {
@@ -19,25 +19,25 @@ const CartTotal = () => {
       <div className="flex flex-col gap-3 text-sm text-gray-700">
         <div className="flex justify-between">
           <span>Subtotal</span>
-          <span>₹{subtotal.toLocaleString('en-IN')}.00</span>
+          <span>Rs. {subtotal.toLocaleString('en-IN')}.00</span>
         </div>
 
         <div className="border-t" />
 
         <div className="flex justify-between">
           <span>Shipping Fee</span>
-          <span>₹{delivery_fee.toLocaleString('en-IN')}.00</span>
+          <span>Rs. {delivery_fee.toLocaleString('en-IN')}.00</span>
         </div>
 
         <div className="border-t" />
 
         <div className="flex justify-between text-base font-medium pt-1">
           <span>Total</span>
-          <span>₹{total.toLocaleString('en-IN')}.00</span>
+          <span>Rs. {total.toLocaleString('en-IN')}.00</span>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default CartTotal;
