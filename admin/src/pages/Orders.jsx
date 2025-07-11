@@ -91,7 +91,7 @@ const Orders = ({ token }) => {
 
               {/* Price */}
               <div className="text-sm font-semibold text-gray-800 flex items-center">
-                ₹ {order.amount.toLocaleString('en-IN')}
+                Rs. {order.amount.toLocaleString('en-IN')}
               </div>
 
               {/* Status Dropdown */}

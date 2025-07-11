@@ -66,7 +66,7 @@ const List = ({ token }) => {
             <img src={item.image[0]} alt="product" className="w-12 h-12 object-cover rounded" />
             <p className="truncate">{item.name}</p>
             <p>{item.category}</p>
-            <p>₹{item.price.toLocaleString('en-IN')}</p>
+            <p>Rs. {item.price.toLocaleString('en-IN')}</p> {/* Updated here */}
             <button
               onClick={() => removeProduct(item._id)}
               className="text-red-500 font-bold text-center hover:scale-110 transition-transform"
@@ -82,3 +82,4 @@ const List = ({ token }) => {
 };
 
 export default List;
+
