@@ -1,5 +1,6 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 const Hero = () => {
   return (
@@ -21,10 +22,10 @@ const Hero = () => {
           </h1>
 
           {/* CTA */}
-          <div className="flex items-center gap-2 group cursor-pointer">
+          <Link to="/collection" className="flex items-center gap-2 group cursor-pointer">
             <p className="font-semibold text-base md:text-lg group-hover:underline">SHOP NOW</p>
             <span className="w-8 md:w-10 h-[1px] bg-gray-800 dark:bg-gray-200"></span>
-          </div>
+          </Link>
 
         </div>
       </div>
@@ -35,7 +36,7 @@ const Hero = () => {
       </div>
 
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

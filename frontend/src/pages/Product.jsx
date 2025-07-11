@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets'
 import RelatedProducts from '../components/RelatedProducts'
+import { toast } from 'react-hot-toast' // Toast import
 
 const Product = () => {
   const { productId } = useParams()
@@ -20,9 +21,12 @@ const Product = () => {
     }
   }, [productId, products])
 
+  // Updated Add to Cart Function with toast
   const handleAddToCart = () => {
-    if (!size) return alert('Please select a size first!')
+    if (!size) return toast.error('Please select a size first!')
     addToCart(productData._id, size)
+    // toast.success('Item added to cart 🛒')
+    alert('Item added to cart 🛒')
   }
 
   if (!productData) return <div className="opacity-0 h-screen"></div>
