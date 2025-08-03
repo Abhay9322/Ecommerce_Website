@@ -37,6 +37,33 @@ Ecommerce-Website/
 
 ---
 
+
+*Homepage*
+<!-- ![homepage](https://github.com/user-attachments/assets/040856fa-6beb-44f9-ab00-8036abfabe18) -->
+![homepage](./images/Home.png)
+
+*Login*
+![learn](./images/Login.png)
+
+*About*
+![workspace](./images/About.png)
+
+*Collection*
+![chat](./images/Collection.png)
+
+*Cart*
+![learn](./images/Addcart.png)
+
+*Cart*
+![learn](./images/Cart.png)
+
+*Orders*
+![notes](./images/Orders.png)
+
+*Contact*
+![notes](./images/Contact.png)
+
+
 ## 💻 How to Run Locally
 
 ### 📌 1. Clone Repository
